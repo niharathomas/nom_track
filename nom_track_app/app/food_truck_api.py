@@ -43,6 +43,18 @@ def get_food_trucks_for_day(dt):
                 "number_of_reviews": int(123),
                 "cost": "$"
             }
+        },
+        {
+            "date": dt.__str__(),
+            "name": "Pringles Truck",
+            "website": "http://example.com",
+            "type": "Cafe",
+            "menu": "http://example.com/menu",
+            "yelp_info": {
+                "rating": float(10.0),
+                "number_of_reviews": int(123),
+                "cost": "$"
+            }
         }
     ]
     return example
