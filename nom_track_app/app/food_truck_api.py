@@ -4,6 +4,7 @@ from datetime import datetime
 
 from flask import Flask, render_template
 from flask_cache import Cache
+from flask_cors import CORS
 
 cache = Cache(config={'CACHE_TYPE': 'simple'})
 # app = Flask(__name__)
@@ -12,6 +13,8 @@ app = Flask(__name__,
             template_folder="./dist")
 cache.init_app(app)
 
+# Enable CORS
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # implement caching
 @cache.memoize()
@@ -27,6 +30,18 @@ def get_food_trucks_for_day(dt):
                 "rating": float(5.0),
                 "number_of_reviews": int(123),
                 "cost": "$$$$$$$$"
+            }
+        },
+        {
+            "date": dt.__str__(),
+            "name": "Moon Truck",
+            "website": "http://example.com",
+            "type": "HH",
+            "menu": "http://example.com/menu",
+            "yelp_info": {
+                "rating": float(8.0),
+                "number_of_reviews": int(123),
+                "cost": "$"
             }
         }
     ]
