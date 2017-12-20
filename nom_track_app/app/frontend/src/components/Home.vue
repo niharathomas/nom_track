@@ -2,11 +2,10 @@
   <div>
     <h1>Nom Truck</h1>
     <h4>Your one stop shop for everything lunch around the Howard Hughes Center in Los Angeles</h4>
-    <!--<p>Response from /api/today: </p>-->
-    <!--<div v-for="foodOption in todaysFoodOptions">-->
-      <!--{{ foodOption }}-->
-    <!--</div>-->
-    <div><b-card-group deck>
+    <div class="text-danger">You have xx mins to get food... gogogo</div>
+    <div class="text-warning">{{ now }}</div>
+    <div class="mt-5 mb-5">
+      <b-card-group deck class="mb-3 mx-auto d-flex justify-content-center">
 
     <div v-for="foodOption in todaysFoodOptions">
       <b-card :title="foodOption.name"
@@ -29,7 +28,7 @@
     </b-card-group>
     </div>
 
-    <button @click="getTodaysFoodOptions">What's for lunch?</button>
+    <button @click="getTodaysFoodOptions">What should I eat today?</button>
   </div>
 </template>
 
@@ -38,10 +37,27 @@
   export default {
     data () {
       return {
-        todaysFoodOptions: this.getTodaysFoodOptionsFromAPI()
+        todaysFoodOptions: this.getTodaysFoodOptionsFromAPI(),
+        now: new Date()
       }
     },
     methods: {
+//      created () {
+//        setInterval(() => this.now = new Date, 1000 * 60)
+//      },
+      getFoodImage () {
+        const path = `https://lorempixel.com/600/300/food/`
+        axios.get(path)
+          .then(response => {
+            console.log('Food Image ====')
+            console.log(response)
+            this.foodImage = response
+          })
+          .catch(error => {
+            console.log('ERROR!!!!!!!!!!!')
+            console.log(error)
+          })
+      },
       getTodaysFoodOptions () {
         this.todaysFoodOptions = this.getTodaysFoodOptionsFromAPI()
       },
@@ -49,7 +65,6 @@
         const path = `http://localhost:5000/api/today`
         axios.get(path)
           .then(response => {
-            console.log(response.data)
             this.todaysFoodOptions = response.data
           })
           .catch(error => {
