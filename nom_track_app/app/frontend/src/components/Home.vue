@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Nom Truck</h1>
+    <h1>Nom Track</h1>
     <h4>Your one stop shop for everything lunch around the Howard Hughes Center in Los Angeles</h4>
     <div class="text-danger">You have xx mins to get food... gogogo</div>
     <div class="text-warning">{{ now }}</div>
